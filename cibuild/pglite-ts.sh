@@ -20,7 +20,7 @@
 END
 
 
-    npm install
+    pnpm install
 
     mkdir $PGLITE/release || rm $PGLITE/release/*
 
@@ -71,11 +71,11 @@ END
     # part from here
     if $CI
     then
-        npm run build:js
+        pnpm run build:js
         mkdir -p /tmp/sdk
-        npm pack
+        pnpm pack
         packed=$(echo -n electric-sql-pglite-*.tgz)
-        mv $packed /tmp/sdk/pg${PGVERSION}-${packed}
+        mv $packed /tmp/sdk/${packed}
 
         # for repl demo
         mkdir -p /tmp/web/

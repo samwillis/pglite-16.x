@@ -212,7 +212,7 @@ do
 done
 
 
-cp $GITHUB_WORKSPACE/{tests/vtx.js,patches/Repl.js,patches/repl.html,patches/pgfs.html,patches/tinytar.min.js} ${WEBROOT}/
+cp $GITHUB_WORKSPACE/{tests/vtx.js,patches/repl.html,patches/pgfs.html,patches/tinytar.min.js} ${WEBROOT}/
 
 popd
 
