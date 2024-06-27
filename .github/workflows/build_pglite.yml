@@ -98,7 +98,7 @@ jobs:
 
     - name: Bundle full pglite SDK
       run: |
-        bash ./cibuild.sh pglite-bundle-sdk
+        bash ./cibuild.sh pglite-bundle-interim
 
     - name: Build REPL for Example deployment
       working-directory: ./packages/repl
@@ -107,11 +107,18 @@ jobs:
         pnpm run build
         cp dist-webcomponent/Repl.js /tmp/web/Repl.js
 
-    - name: Upload SDK to Github artifacts
+    - name: Upload Postgres to Github artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: PGLite SDK
-        path: /tmp/sdk/pglite-pg*.tar.gz
+        name: Postgres WASM
+        path: /tmp/sdk/postgres-*.tar.gz
+        retention-days: 90
+
+    - name: Upload PGlite Interim to Github artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: PGLite Build Files
+        path: /tmp/sdk/pglite-interim-*.tar.gz
         retention-days: 90
 
     - name: Upload PGlite to Github artifacts

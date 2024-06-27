@@ -226,7 +226,7 @@ then
     rm ${PGROOT}/lib/lib*.so.? 2>/dev/null
     if $CI
     then
-        tar -cpRz ${PGROOT} > /tmp/sdk/pg.tar.gz
+        tar -cpRz ${PGROOT} > /tmp/sdk/postgres-${PGVERSION}.tar.gz
     fi
 fi
 
@@ -309,17 +309,15 @@ then
 
 fi
 
-if echo "$*"|grep "pglite-bundle-sdk$"
+if echo "$*"|grep "pglite-bundle-interim$"
 then
     echo "================================================="
     
     PGLITE=$(pwd)/packages/pglite
 
-    mkdir -p ${PGROOT}/sdk/packages/
-    cp -r $PGLITE ${PGROOT}/sdk/packages/
-    tar -cpRz ${PGROOT} > /tmp/sdk/pglite-pg${PGVERSION}.tar.gz
+    tar -cpRz ${PGLITE}/release > /tmp/sdk/pglite-interim-${PGVERSION}.tar.gz
 
-    du -hs ${WEBROOT}/*
+    # du -hs ${WEBROOT}/*
 fi
 
 
