@@ -19,11 +19,8 @@
     export default loadPgShare;
 END
 
-    # Ensure the pnpm is available
-    export NVM_DIR=~/.nvm
-    source ~/.nvm/nvm.sh
 
-    pnpm install
+    npm install
 
     mkdir $PGLITE/release || rm $PGLITE/release/*
 
@@ -74,11 +71,11 @@ END
     # part from here
     if $CI
     then
-        pnpm run build:js
+        npm run build:js
         mkdir -p /tmp/sdk
-        pnpm pack
+        npm pack
         packed=$(echo -n electric-sql-pglite-*.tgz)
-        mv $packed /tmp/sdk/${packed}
+        mv $packed /tmp/sdk/pg${PGVERSION}-${packed}
 
         # for repl demo
         mkdir -p /tmp/web/
@@ -97,5 +94,4 @@ END
     fi
 
     popd
-
 

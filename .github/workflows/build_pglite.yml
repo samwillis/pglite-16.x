@@ -85,9 +85,20 @@ jobs:
       with:
         version: 8
 
-    - name: Build PGlite and pack extensions via npm
+    - name: Copy release for PGlite build
       run: |
-        bash ./cibuild.sh pglite
+        bash ../../cibuild.sh pglite-prep
+
+    - name: Build PGlite
+      working-directory: ./packages/pglite
+      run: |
+        pnpm install
+        pnpm run build
+        pnpm pack
+
+    - name: Bundle full pglite SDK
+      run: |
+        bash ./cibuild.sh pglite-bundle
 
     - name: Build REPL for Example deployment
       working-directory: ./packages/repl
@@ -107,7 +118,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: PGLite
-        path: /tmp/sdk/electric-sql-pglite-*.tgz
+        path: ./electric-sql-pglite-*.tgz
         retention-days: 90
   
     - name: Deploy to Netlify

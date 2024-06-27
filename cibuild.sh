@@ -272,6 +272,8 @@ fi
 
 # pglite also use web build files, so make it last.
 
+# TODO: SAMs NOTE - Not using this in GitHub action as it doesnt resolve pnpm correctly
+# replaced with pglite-prep and pglite-bundle-sdk
 if echo "$*"|grep "pglite$"
 then
     echo "================================================="
@@ -291,8 +293,30 @@ then
     du -hs ${WEBROOT}/*
 fi
 
+if echo "$*"|grep "pglite-prep$"
+then
+    echo "================================================="
 
+    mkdir $PGLITE/release || rm $PGLITE/release/*
 
+    # copy packed extensions
+    cp ${WEBROOT}/*.tar.gz ${PGLITE}/release/
+
+    cp -vf ${WEBROOT}/postgres.{js,data,wasm} $PGLITE/release/
+    cp -vf ${WEBROOT}/libecpg.so $PGLITE/release/postgres.so
+
+fi
+
+if echo "$*"|grep "pglite-bundle-sdk$"
+then
+    echo "================================================="
+
+    mkdir -p ${PGROOT}/sdk/packages/
+    cp -r $PGLITE ${PGROOT}/sdk/packages/
+    tar -cpRz ${PGROOT} > /tmp/sdk/pglite-pg${PGVERSION}.tar.gz
+
+    du -hs ${WEBROOT}/*
+fi
 
 
 

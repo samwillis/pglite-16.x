@@ -49,21 +49,13 @@ Unlike previous "Postgres in the browser" projects, PGlite does not use a Linux 
 
 It is being developed at [ElectricSQL](http://electric-sql.com) in collaboration with [Neon](http://neon.tech). We will continue to build on this experiment with the aim of creating a fully capable lightweight WASM Postgres with support for extensions such as pgvector.
 
-## Whats new in V0.1
-
-Version 0.1 (up from 0.0.2) includes significant changes to the Postgres build - it's about 1/3 smaller at 2.6mb gzipped, and up to 2-3 times faster. We have also found a way to statically compile Postgres extensions into the build - the first of these is pl/pgsql with more coming soon.
+## Whats new in V0.2.0
 
 Key changes in this release are:
 
-- Support for [parameterised queries](#querytquery-string-params-any-options-queryoptions-promiseresultst) #39
-- An interactive [transaction API](#transactiontcallback-tx-transaction--promiset) #39
-- pl/pgsql support #48
-- Additional [query options](#queryoptions) #51
-- Run PGlite in a [Web Workers](#web-workers) #49
-- Fix for running on Windows #54
-- Fix for missing `pg_catalog` and `information_schema` tables and view #41
-
-We have also [published some benchmarks](https://github.com/electric-sql/pglite/blob/main/packages/benchmark/README.md) in comparison to a WASM SQLite build, and both native Postgres and SQLite. While PGlite is currently a little slower than WASM SQLite we have plans for further optimisations, including OPFS support and removing some the the Emscripten options that can add overhead.
+- Postgres release 16.2
+- Support Postgres dynamic extensions.
+- Running on node/bun
 
 ## Browser
 
