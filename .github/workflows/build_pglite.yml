@@ -29,10 +29,6 @@ jobs:
       with:
         fetch-depth: 1
 
-    - uses: pnpm/action-setup@v4
-      with:
-        version: 8
-
     - name: Restore cached
       id: cache-restore
       uses: actions/cache/restore@v4
@@ -84,6 +80,10 @@ jobs:
           postgres
           postgresql-*
         key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 8
 
     - name: Build PGlite and pack extensions via npm
       run: |
