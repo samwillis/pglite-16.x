@@ -331,13 +331,13 @@ then
             <li><a href=./xterm-demo/postgres.html>Postgres xterm REPL</a></li>
         </ul>
     </body>
-    </html>" > /tmp/index.html
+    </html>" > /tmp/web/index.html
 
-    mkdir -p /tmp/pglite
-    mkdir -p /tmp/repl
+    mkdir -p /tmp/web/pglite
+    mkdir -p /tmp/web/repl
 
     PGLITE=$(pwd)/packages/pglite
-    cp -r ${PGLITE}/dist /tmp/pglite/
-    cp -r ${PGLITE}/examples /tmp/pglite/
-    cp -r $(pwd)/packages/repl/dist-webcomponent /tmp/repl/
+    cp -r ${PGLITE}/dist /tmp/web/pglite/
+    cp -r ${PGLITE}/examples /tmp/web/pglite/
+    cp -r $(pwd)/packages/repl/dist-webcomponent /tmp/web/repl/
 fi
