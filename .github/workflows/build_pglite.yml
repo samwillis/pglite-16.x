@@ -118,7 +118,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: PGLite
-        path: ./electric-sql-pglite-*.tgz
+        path: ./packages/pglite/electric-sql-pglite-*.tgz
         retention-days: 90
   
     - name: Deploy to Netlify
