@@ -43,6 +43,7 @@ jobs:
       with:
         path: |
           postgres
+          postgres-*
         key: build-cache-${{ hashFiles('cibuild/**', 'patches/**') }}
 
     - name: Build postgres WASM via emsdk
@@ -56,6 +57,7 @@ jobs:
       with:
         path: |
           postgres
+          postgres-*
         key: ${{ steps.cache-restore.outputs.cache-primary-key }}
 
     - name: Build pgvector
