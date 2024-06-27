@@ -30,57 +30,45 @@ jobs:
       with:
         fetch-depth: 1
 
-    - name: Restore cached
-      id: cache-restore
-      uses: actions/cache/restore@v4
-      with:
-        path: |
-          /tmp/web
-          /tmp/pglite
-          /tmp/sdk/pg.tar.gz
-          postgres
-          postgresql-*
-        key: build-cache-${{ hashFiles('cibuild/**', 'patches/**') }}
-
     - name: Install python-wasm-sdk for emsdk/wasi+prebuilts
-      if: steps.cache-restore.outputs.cache-hit != 'true'
       working-directory: /
       run: |
         sudo apt-get install -y lz4 wget pv bash
         echo https://github.com/pygame-web/python-wasm-sdk/releases/download/$SDK_VERSION/$SDK_ARCHIVE
         curl -sL --retry 5 https://github.com/pygame-web/python-wasm-sdk/releases/download/$SDK_VERSION/$SDK_ARCHIVE | tar xvP --use-compress-program=lz4 | pv -p -l -s 24400 >/dev/null
 
+    - name: Restore cached
+      id: cache-restore
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          postgres
+        key: build-cache-${{ hashFiles('cibuild/**', 'patches/**') }}
+
     - name: Build postgres WASM via emsdk
       if: steps.cache-restore.outputs.cache-hit != 'true'
       run: |
         bash ./cibuild.sh
-
-    - name: Build pgvector
-      if: steps.cache-restore.outputs.cache-hit != 'true'
-      run: |
-        bash ./cibuild.sh vector
-
-    - name: Pack node distribution
-      if: steps.cache-restore.outputs.cache-hit != 'true'
-      run: |
-        bash ./cibuild.sh node
-
-    - name: Link postgres WASM for web
-      if: steps.cache-restore.outputs.cache-hit != 'true'
-      run: |
-        bash ./cibuild.sh linkweb
 
     - name: Cached intermediate
       id: cache-intermediate
       uses: actions/cache/save@v4
       with:
         path: |
-          /tmp/web
-          /tmp/pglite
-          /tmp/sdk/postgresql-*.tar.gz
           postgres
-          postgresql-*
         key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+
+    - name: Build pgvector
+      run: |
+        bash ./cibuild.sh vector
+
+    - name: Pack node distribution
+      run: |
+        bash ./cibuild.sh node
+
+    - name: Link postgres WASM for web
+      run: |
+        bash ./cibuild.sh linkweb
 
     - uses: pnpm/action-setup@v4
       with:
