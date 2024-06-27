@@ -19,6 +19,9 @@
     export default loadPgShare;
 END
 
+    # Ensure the pnpm is available
+    export NVM_DIR=~/.nvm
+    source ~/.nvm/nvm.sh
 
     pnpm install
 
