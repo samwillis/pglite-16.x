@@ -87,7 +87,7 @@ jobs:
 
     - name: Copy release for PGlite build
       run: |
-        bash ../../cibuild.sh pglite-prep
+        bash ./cibuild.sh pglite-prep
 
     - name: Build PGlite
       working-directory: ./packages/pglite
