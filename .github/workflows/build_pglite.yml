@@ -98,7 +98,7 @@ jobs:
 
     - name: Bundle full pglite SDK
       run: |
-        bash ./cibuild.sh pglite-bundle
+        bash ./cibuild.sh pglite-bundle-sdk
 
     - name: Build REPL for Example deployment
       working-directory: ./packages/repl
