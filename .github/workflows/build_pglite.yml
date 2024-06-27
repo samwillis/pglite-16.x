@@ -14,6 +14,7 @@ on:
 
 jobs:
   build:
+    name: Build and Test PGlite
     runs-on: ubuntu-22.04
     env:
         PGVERSION: 16.3
@@ -122,6 +123,13 @@ jobs:
       with:
         name: pglite
         path: ./packages/pglite/electric-sql-pglite-*.tgz
+        retention-days: 90
+
+    - name: Upload Demos to Github artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: pglite-demos
+        path: /tmp/web/**
         retention-days: 90
   
     - name: Deploy to Netlify
