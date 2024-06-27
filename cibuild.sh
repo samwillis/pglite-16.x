@@ -297,6 +297,8 @@ if echo "$*"|grep "pglite-prep$"
 then
     echo "================================================="
 
+    PGLITE=$(pwd)/packages/pglite
+
     mkdir $PGLITE/release || rm $PGLITE/release/*
 
     # copy packed extensions
@@ -310,6 +312,8 @@ fi
 if echo "$*"|grep "pglite-bundle-sdk$"
 then
     echo "================================================="
+    
+    PGLITE=$(pwd)/packages/pglite
 
     mkdir -p ${PGROOT}/sdk/packages/
     cp -r $PGLITE ${PGROOT}/sdk/packages/
