@@ -262,8 +262,8 @@ then
     # TODO: include node archive and samples ?
     if $CI
     then
-        mkdir -p /tmp/web/
-        cp -r $WEBROOT/* /tmp/web/
+        mkdir -p /tmp/web/xterm-demo
+        cp -r $WEBROOT/* /tmp/web/xterm-demo
     fi
     popd
 
@@ -317,8 +317,25 @@ then
 
     tar -cpRz ${PGLITE}/release > /tmp/sdk/pglite-interim-${PGVERSION}.tar.gz
 
-    # du -hs ${WEBROOT}/*
 fi
 
+if echo "$*"|grep "demo-site$"
+then
+    echo "================================================="
+    
+    echo "<html>
+    <body>
+        <ul>
+            <li><a href=./pglite/examples/repl.html>PGlite REPL</a></li>
+            <li><a href=./pglite/examples/index.html>All PGlite Examples</a></li>
+            <li><a href=./xterm-demo/postgres.html>Postgres xterm REPL</a></li>
+        </ul>
+    </body>
+    </html>" > /tmp/index.html
 
+    mkdir -p /tmp/pglite
+    mkdir -p /tmp/repl
 
+    cp -r ${PGLITE}/examples /tmp/pglite/
+    cp -r $(pwd)/packages/repl/dist /tmp/repl/
+fi
