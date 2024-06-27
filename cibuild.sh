@@ -336,6 +336,8 @@ then
     mkdir -p /tmp/pglite
     mkdir -p /tmp/repl
 
+    PGLITE=$(pwd)/packages/pglite
+    cp -r ${PGLITE}/dist /tmp/pglite/
     cp -r ${PGLITE}/examples /tmp/pglite/
-    cp -r $(pwd)/packages/repl/dist /tmp/repl/
+    cp -r $(pwd)/packages/repl/dist-webcomponent /tmp/repl/
 fi
