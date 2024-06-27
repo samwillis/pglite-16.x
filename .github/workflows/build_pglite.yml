@@ -76,7 +76,7 @@ jobs:
         path: |
           /tmp/web
           /tmp/pglite
-          /tmp/sdk/pg.tar.gz
+          /tmp/sdk/postgresql-*.tar.gz
           postgres
           postgresql-*
         key: ${{ steps.cache-restore.outputs.cache-primary-key }}
@@ -106,6 +106,7 @@ jobs:
     - name: Upload Postgres to Github artifacts
       uses: actions/upload-artifact@v4
       with:
+        name: postgres-wasm
         path: /tmp/sdk/postgres-*.tar.gz
         retention-days: 90
 
@@ -119,6 +120,7 @@ jobs:
     - name: Upload PGlite to Github artifacts
       uses: actions/upload-artifact@v4
       with:
+        name: pglite
         path: ./packages/pglite/electric-sql-pglite-*.tgz
         retention-days: 90
   
