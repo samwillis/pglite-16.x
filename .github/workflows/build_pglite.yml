@@ -42,9 +42,10 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: |
+          /tmp/pglite
           postgres
-          postgres-*
-        key: build-cache-${{ hashFiles('cibuild/**', 'patches/**') }}
+          postgresql-*
+        key: build-postgres-cache-${{ hashFiles('cibuild/**', 'patches/**') }}
 
     - name: Build postgres WASM via emsdk
       if: steps.cache-restore.outputs.cache-hit != 'true'
@@ -56,8 +57,9 @@ jobs:
       uses: actions/cache/save@v4
       with:
         path: |
+          /tmp/pglite
           postgres
-          postgres-*
+          postgresql-*
         key: ${{ steps.cache-restore.outputs.cache-primary-key }}
 
     - name: Build pgvector
