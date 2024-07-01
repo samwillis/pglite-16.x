@@ -1,0 +1,2 @@
+import{d as o}from"../chunk-JEQ3QEZC.js";import{a,c as s}from"../chunk-OCJAKDFG.js";import"../chunk-BCB573L6.js";import{i}from"../chunk-GN6HPVTV.js";i();var r,y={async init(t,e,n){return r=new o(t,e),await r.waitReady,n&&r.onNotification(n),!0},async close(){await r.close()},async query(t,e,n){return await r.query(t,e,n)},async exec(t,e){return await r.exec(t,e)},async transaction(t){return await r.transaction(e=>t(s(e)))},async execProtocol(t){return await r.execProtocol(t)}};a(y);
+//# sourceMappingURL=process.js.map
